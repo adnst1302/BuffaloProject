@@ -1,6 +1,6 @@
 package buffalo
 
-type BuffaloInput struct {
+type Input struct {
 	Name       string
 	Family     string
 	Population int

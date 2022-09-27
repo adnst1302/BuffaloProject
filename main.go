@@ -16,7 +16,7 @@ import (
 func main() {
 	router := gin.Default()
 
-	dsn := "root:3ncoding4sc11A@@tcp(127.0.0.1:3306)/dbs_buffalo?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:@tcp(127.0.0.1:3306)/dbs_buffalo?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 	if err != nil {
@@ -26,13 +26,13 @@ func main() {
 	db.AutoMigrate(buffalo.Buffalo{})
 	fmt.Println("db berhasil connect")
 
+	buffaloRepository := buffalo.NewRepository(db)
 
-	// buffalo := buffalo.Buffalo{}
-	// buffalo.Name = "Alfi Ananda"
-	// buffalo.Family = "Aogra"
-	// buffalo.Population = 140
+	dataBuffalo, err := buffaloRepository.FindAll()
 
-	// db.Create(&buffalo)
+	for _, buffalo := range dataBuffalo {
+		fmt.Println("Nama : ", buffalo.Name)
+	}
 
 	router.GET("/", HomePage)
 

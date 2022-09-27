@@ -18,7 +18,7 @@ func BuffaloDetail(c *gin.Context) {
 }
 
 func BuffaloAdd(c *gin.Context) {
-	var DataInput buffalo.BuffaloInput
+	var DataInput buffalo.Input
 
 	err := c.ShouldBindJSON(&DataInput)
 
